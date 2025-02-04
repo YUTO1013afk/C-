@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// 2•ª’Tõ–Ø‚Ìƒm[ƒh‚ğ•\‚·\‘¢‘Ì
+// 2åˆ†æ¢ç´¢æœ¨ã®ãƒãƒ¼ãƒ‰ã‚’è¡¨ã™æ§‹é€ ä½“
 typedef struct Node_tag {
     int data;
     struct Node_tag* left;
     struct Node_tag* right;
 } Node;
 
-// ƒvƒƒgƒ^ƒCƒvéŒ¾
+// ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 Node* createNode(int data);
 Node* insert(Node* root, int data);
 Node* search(Node* root, int data);
@@ -18,13 +18,13 @@ Node* balance(Node* root);
 Node* insertB(Node* root, int data);
 int height(Node* root);
 
-//ƒJƒEƒ“ƒ^•Ï”
+//ã‚«ã‚¦ãƒ³ã‚¿å¤‰æ•°
 Node* pstCreateNode[10] = { NULL };
 int iCreateNodeNum = 0;
-int rotateR_Count = 0;  // ‰E‰ñ“]‚Ì‰ñ”
-int rotateL_Count = 0;  // ¶‰ñ“]‚Ì‰ñ”
+int rotateR_Count = 0;  // å³å›è»¢ã®å›æ•°
+int rotateL_Count = 0;  // å·¦å›è»¢ã®å›æ•°
 
-// V‚µ‚¢ƒm[ƒh‚ğì¬‚·‚éŠÖ”
+// æ–°ã—ã„ãƒãƒ¼ãƒ‰ã‚’ä½œæˆã™ã‚‹é–¢æ•°
 Node* createNode(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     if (newNode != NULL) {
@@ -37,7 +37,7 @@ Node* createNode(int data) {
     return newNode;
 }
 
-// 2•ª–Ø‚Éƒf[ƒ^‚ğ‘}“ü‚·‚éŠÖ”
+// 2åˆ†æœ¨ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥ã™ã‚‹é–¢æ•°
 Node* insert(Node* root, int data) {
     if (root == NULL) {
         return createNode(data);
@@ -51,7 +51,7 @@ Node* insert(Node* root, int data) {
     return root;
 }
 
-// 2•ª–Ø‚ğ’Tõ‚·‚éŠÖ”
+// 2åˆ†æœ¨ã‚’æ¢ç´¢ã™ã‚‹é–¢æ•°
 Node* search(Node* root, int data) {
     if (root == NULL || root->data == data) {
         return root;
@@ -64,31 +64,31 @@ Node* search(Node* root, int data) {
     }
 }
 
-// ‰E‰ñ“]
+// å³å›è»¢
 Node* rotateR(Node* root) {
     Node* a;
-    a = root->left;  // ¶‚Ìqƒm[ƒh‚ªV‚µ‚¢ƒ‹[ƒg‚É‚È‚é
-    root->left = a->right;  // V‚µ‚¢ƒ‹[ƒg‚Ì‰Eqƒm[ƒh‚ğŒ³‚Ìƒm[ƒh‚Ì¶q‚Éİ’è
-    a->right = root;  // Œ³‚Ìƒ‹[ƒg‚ğV‚µ‚¢ƒ‹[ƒg‚Ì‰Eq‚Éİ’è
+    a = root->left;  // å·¦ã®å­ãƒãƒ¼ãƒ‰ãŒæ–°ã—ã„ãƒ«ãƒ¼ãƒˆã«ãªã‚‹
+    root->left = a->right;  // æ–°ã—ã„ãƒ«ãƒ¼ãƒˆã®å³å­ãƒãƒ¼ãƒ‰ã‚’å…ƒã®ãƒãƒ¼ãƒ‰ã®å·¦å­ã«è¨­å®š
+    a->right = root;  // å…ƒã®ãƒ«ãƒ¼ãƒˆã‚’æ–°ã—ã„ãƒ«ãƒ¼ãƒˆã®å³å­ã«è¨­å®š
     rotateR_Count++;
-    return a;  // V‚µ‚¢ƒ‹[ƒg‚ğ•Ô‚·
+    return a;  // æ–°ã—ã„ãƒ«ãƒ¼ãƒˆã‚’è¿”ã™
 }
 
-// ¶‰ñ“]
+// å·¦å›è»¢
 Node* rotateL(Node* root) {
     Node* a;
-    a = root->right;  // ‰E‚Ìqƒm[ƒh‚ªV‚µ‚¢ƒ‹[ƒg‚É‚È‚é
-    root->right = a->left;  // V‚µ‚¢ƒ‹[ƒg‚Ì¶qƒm[ƒh‚ğŒ³‚Ìƒm[ƒh‚Ì‰Eq‚Éİ’è
-    a->left = root;  // Œ³‚Ìƒ‹[ƒg‚ğV‚µ‚¢ƒ‹[ƒg‚Ì¶q‚Éİ’è
+    a = root->right;  // å³ã®å­ãƒãƒ¼ãƒ‰ãŒæ–°ã—ã„ãƒ«ãƒ¼ãƒˆã«ãªã‚‹
+    root->right = a->left;  // æ–°ã—ã„ãƒ«ãƒ¼ãƒˆã®å·¦å­ãƒãƒ¼ãƒ‰ã‚’å…ƒã®ãƒãƒ¼ãƒ‰ã®å³å­ã«è¨­å®š
+    a->left = root;  // å…ƒã®ãƒ«ãƒ¼ãƒˆã‚’æ–°ã—ã„ãƒ«ãƒ¼ãƒˆã®å·¦å­ã«è¨­å®š
     rotateL_Count++;
-    return a;  // V‚µ‚¢ƒ‹[ƒg‚ğ•Ô‚·
+    return a;  // æ–°ã—ã„ãƒ«ãƒ¼ãƒˆã‚’è¿”ã™
 }
 
-// balanceŠÖ” 
+// balanceé–¢æ•° 
 Node* balance(Node* root) {
     int h1, h2, h3;
-    int leftHeight = 0;  // ¶ƒTƒuƒcƒŠ[‚Ì‚‚³
-    int rightHeight = 0;  // ‰EƒTƒuƒcƒŠ[‚Ì‚‚³
+    int leftHeight = 0;  // å·¦ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
+    int rightHeight = 0;  // å³ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
 
     leftHeight = height(root->left);
     rightHeight = height(root->right);
@@ -111,7 +111,7 @@ Node* balance(Node* root) {
     return root;
 }
 
-// 2•ª–Ø‚Éƒf[ƒ^‚ğ‘}“ü‚·‚éŠÖ”
+// 2åˆ†æœ¨ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥ã™ã‚‹é–¢æ•°
 Node* insertB(Node* root, int data)
 {
     if (root == NULL) {
@@ -123,35 +123,35 @@ Node* insertB(Node* root, int data)
     else if (data > root->data) {
         root->right = insertB(root->right, data);
     }
-    root = balance(root); //’Ç‰Á
+    root = balance(root); //è¿½åŠ 
     return root;
 }
 
-// ‚‚³‚ğŒvZ‚·‚éŠÖ”
+// é«˜ã•ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
 int height(Node* root) {
-    // ƒcƒŠ[‚Ì‚‚³‚Ì•Ï”
-    int leftHeight = 0;  // ¶ƒTƒuƒcƒŠ[‚Ì‚‚³
-    int rightHeight = 0;  // ‰EƒTƒuƒcƒŠ[‚Ì‚‚³
+    // ãƒ„ãƒªãƒ¼ã®é«˜ã•ã®å¤‰æ•°
+    int leftHeight = 0;  // å·¦ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
+    int rightHeight = 0;  // å³ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
 
     if (root == NULL) {
-        return 0;  // ‹ó‚Ìƒm[ƒh‚Í‚‚³0
+        return 0;  // ç©ºã®ãƒãƒ¼ãƒ‰ã¯é«˜ã•0
     }
 
     if (root->left != NULL) {
-        leftHeight += height(root->left);  // ¶ƒTƒuƒcƒŠ[‚Ì‚‚³
+        leftHeight += height(root->left);  // å·¦ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
         /*if ((root->left->left != NULL) || (root->left->right) != NULL) {
             leftHeight++;
         }*/
     }
     if (root->right != NULL) {
-        rightHeight += height(root->right);  // ‰EƒTƒuƒcƒŠ[‚Ì‚‚³
+        rightHeight += height(root->right);  // å³ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
         /*if ((root->right->left != NULL) || (root->right->right) != NULL) {
             rightHeight++;
         }*/
     }
 
-    //leftHeight += height(root->left);  // ¶ƒTƒuƒcƒŠ[‚Ì‚‚³
-    //rightHeight += height(root->right);  // ‰EƒTƒuƒcƒŠ[‚Ì‚‚³
+    //leftHeight += height(root->left);  // å·¦ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
+    //rightHeight += height(root->right);  // å³ã‚µãƒ–ãƒ„ãƒªãƒ¼ã®é«˜ã•
 
     if (leftHeight == rightHeight) {
         return leftHeight + 1;
@@ -164,13 +164,13 @@ int height(Node* root) {
     }
 }
 
-// ƒƒCƒ“ŠÖ”‚Ì—á
+// ãƒ¡ã‚¤ãƒ³é–¢æ•°
 int main(void)
 {
-    Node* root = NULL; // ‰Šú‚Ìƒ‹[ƒgƒm[ƒh‚ÍNULL
+    Node* root = NULL; // åˆæœŸã®ãƒ«ãƒ¼ãƒˆãƒãƒ¼ãƒ‰ã¯NULL
     int key = 1;
 
-    // ƒf[ƒ^‚ğ‘}“ü
+    // ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥
    /* root = insertB(root, 1);
     root = insertB(root, 3);
     root = insertB(root, 4);
@@ -187,19 +187,19 @@ int main(void)
     root = insertB(root, 4);
     root = insertB(root, 8);
 
-    // ’Tõ
+    // æ¢ç´¢
     key = 9;
     Node* result = search(root, key);
     if (result != NULL) {
-        printf("ƒf[ƒ^%d‚ªŒ©‚Â‚©‚è‚Ü‚µ‚½B\n", key);
+        printf("ãƒ‡ãƒ¼ã‚¿%dãŒè¦‹ã¤ã‹ã‚Šã¾ã—ãŸã€‚\n", key);
     }
     else {
-        printf("ƒf[ƒ^%d‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B\n", key);
+        printf("ãƒ‡ãƒ¼ã‚¿%dãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚\n", key);
     }
 
-    // ‰E‰ñ“]‚Æ¶‰ñ“]‚Ì‰ñ”‚ğ•\¦
-    printf("‰E‰ñ“]‚ª%d‰ñÀs‚³‚ê‚Ü‚µ‚½B\n", rotateR_Count);
-    printf("¶‰ñ“]‚ª%d‰ñÀs‚³‚ê‚Ü‚µ‚½B\n", rotateL_Count);
+    // å³å›è»¢ã¨å·¦å›è»¢ã®å›æ•°ã‚’è¡¨ç¤º
+    printf("å³å›è»¢ãŒ%då›å®Ÿè¡Œã•ã‚Œã¾ã—ãŸã€‚\n", rotateR_Count);
+    printf("å·¦å›è»¢ãŒ%då›å®Ÿè¡Œã•ã‚Œã¾ã—ãŸã€‚\n", rotateL_Count);
 
     return 0;
 }
